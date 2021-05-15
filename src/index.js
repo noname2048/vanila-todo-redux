@@ -11,7 +11,7 @@ const ADD_TODO = "ADD_TODO"
 const DELETE_TODO = "DELETE_TODO"
 
 // redux PATTEN 
-// 02. functions that return actions
+// 02. functions that return actions (action creators)
 
 const addToDo = (text) => {
   return (
@@ -32,9 +32,11 @@ const deleteToDo = (id) => {
 const reducer = (state = [], action) => {
   switch (action.type) {
     case ADD_TODO:
-      return [{ text: action.text, id: Date.now() }, ...state];
+      const newToDoObj = { text: action.text, id: Date.now() }
+      return [newToDoObj, ...state];
     case DELETE_TODO:
-      return state.filter(toDo => toDo.id !== action.id);
+      const cleaned = state.filter(toDo => toDo.id !== action.id);
+      return cleaned;
     default:
       return [];
   }
